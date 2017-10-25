@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 print("loading ... ")
-X_train, y_train = data.get_mstar_data("train", 128, 128)
-X_test, y_test = data.get_mstar_data("test", 128, 128)
+X_train, y_train = data.get_mstar_data("train", 128, 128, 96)
+X_test, y_test = data.get_mstar_data("test", 128, 128, 96)
 X_train = np.reshape(X_train, [X_train.shape[0], X_train.shape[1] * X_train.shape[2]])
 X_test = np.reshape(X_test, [X_test.shape[0], X_test.shape[1] * X_test.shape[2]])
 print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)

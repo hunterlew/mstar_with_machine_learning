@@ -4,7 +4,7 @@ import os
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.decomposition import PCA
 
-def get_mstar_data(stage, width=128, height=128, aug=False):
+def get_mstar_data(stage, width=128, height=128, crop_size=128, aug=False):
     data_dir = "MSTAR-10/train/" if stage == "train" else "MSTAR-10/test/" if stage == "test" else None
     print("------ " + stage + " ------")
     sub_dir = ["2S1", "BMP2", "BRDM_2", "BTR60", "BTR70", "D7", "T62", "T72", "ZIL131", "ZSU_23_4"]
@@ -18,7 +18,9 @@ def get_mstar_data(stage, width=128, height=128, aug=False):
         y += [i] * len(img_idx)
         for j in range(len(img_idx)):
             img = im.imresize(im.imread((tmp_dir + img_idx[j])), [height, width])
-            img = img[16:112, 16:112]   # crop
+            img = img[(height - crop_size) // 2 : height - (height - crop_size) // 2, \
+                  (width - crop_size) // 2: width - (width - crop_size) // 2]
+            # img = img[16:112, 16:112]   # crop
             X.append(img)
 
     return np.asarray(X), np.asarray(y)
